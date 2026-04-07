@@ -25,7 +25,10 @@ services:
     plan: free
     envVars:
       - key: NEXT_PUBLIC_API_URL
-        value: https://doan-api-v9z2.onrender.com/api # Full URL with /api suffix
+        fromService:
+          type: web
+          name: doan-api
+          property: host
       - key: NODE_ENV
         value: production
       - key: PORT
