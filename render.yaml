@@ -1,0 +1,35 @@
+services:
+  # Backend API
+  - type: web
+    name: doan-api
+    env: docker
+    dockerContext: ./backend
+    dockerfilePath: backend/Dockerfile
+    plan: free
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: MONGODB_URI
+        value: mongodb+srv://Dung:01667499214@cluster0.romcgub.mongodb.net/?appName=Cluster0
+      - key: JWT_SECRET
+        generateValue: true
+      - key: PORT
+        value: 10000
+
+  # Frontend Web
+  - type: web
+    name: doan-web
+    env: docker
+    dockerContext: ./frontend
+    dockerfilePath: frontend/Dockerfile
+    plan: free
+    envVars:
+      - key: NEXT_PUBLIC_API_URL
+        fromService:
+          type: web
+          name: doan-api
+          property: host
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 10000

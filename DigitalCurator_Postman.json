@@ -1,0 +1,249 @@
+{
+  "info": {
+    "name": "The Digital Curator API",
+    "description": "Postman collection for The Digital Curator API covering all admin and user functions.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    { "key": "baseUrl", "value": "http://localhost:5000/api", "type": "string" },
+    { "key": "token", "value": "", "type": "string" },
+    { "key": "adminToken", "value": "", "type": "string" }
+  ],
+  "item": [
+    {
+      "name": "Auth",
+      "item": [
+        {
+          "name": "Register User",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": { "raw": "{{baseUrl}}/auth/register", "host": ["{{baseUrl}}"], "path": ["auth", "register"] },
+            "body": { "mode": "raw", "raw": "{\n  \"fullname\": \"Test User\",\n  \"email\": \"test@example.com\",\n  \"password\": \"password123\"\n}" }
+          }
+        },
+        {
+          "name": "Login User",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": { "raw": "{{baseUrl}}/auth/login", "host": ["{{baseUrl}}"], "path": ["auth", "login"] },
+            "body": { "mode": "raw", "raw": "{\n  \"email\": \"test@example.com\",\n  \"password\": \"password123\"\n}" }
+          }
+        },
+        {
+          "name": "Login Admin",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": { "raw": "{{baseUrl}}/auth/login", "host": ["{{baseUrl}}"], "path": ["auth", "login"] },
+            "body": { "mode": "raw", "raw": "{\n  \"email\": \"admin@digitalcurator.com\",\n  \"password\": \"admin123\"\n}" }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Users",
+      "item": [
+        {
+          "name": "Get User Profile",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": { "raw": "{{baseUrl}}/users/profile", "host": ["{{baseUrl}}"], "path": ["users", "profile"] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Admin",
+      "item": [
+        {
+          "name": "Get Stats",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{adminToken}}" }],
+            "url": { "raw": "{{baseUrl}}/admin/stats", "host": ["{{baseUrl}}"], "path": ["admin", "stats"] }
+          }
+        },
+        {
+          "name": "Get All Users",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{adminToken}}" }],
+            "url": { "raw": "{{baseUrl}}/admin/users", "host": ["{{baseUrl}}"], "path": ["admin", "users"] }
+          }
+        },
+        {
+          "name": "Update User Role",
+          "request": {
+            "method": "PUT",
+            "header": [{ "key": "Authorization", "value": "Bearer {{adminToken}}" }, { "key": "Content-Type", "value": "application/json" }],
+            "url": { "raw": "{{baseUrl}}/admin/users/USER_ID/role", "host": ["{{baseUrl}}"], "path": ["admin", "users", "USER_ID", "role"] },
+            "body": { "mode": "raw", "raw": "{\n  \"role\": \"admin\"\n}" }
+          }
+        },
+        {
+          "name": "Delete User",
+          "request": {
+             "method": "DELETE",
+             "header": [{ "key": "Authorization", "value": "Bearer {{adminToken}}" }],
+             "url": { "raw": "{{baseUrl}}/admin/users/USER_ID", "host": ["{{baseUrl}}"], "path": ["admin", "users", "USER_ID"] }
+          }
+        },
+        {
+          "name": "Get All Products (Admin)",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{adminToken}}" }],
+            "url": { "raw": "{{baseUrl}}/admin/products", "host": ["{{baseUrl}}"], "path": ["admin", "products"] }
+          }
+        },
+        {
+          "name": "Update Product (Admin)",
+          "request": {
+            "method": "PUT",
+            "header": [{ "key": "Authorization", "value": "Bearer {{adminToken}}" }, { "key": "Content-Type", "value": "application/json" }],
+            "url": { "raw": "{{baseUrl}}/admin/products/PRODUCT_ID", "host": ["{{baseUrl}}"], "path": ["admin", "products", "PRODUCT_ID"] },
+            "body": { "mode": "raw", "raw": "{\n  \"price\": 9999\n}" }
+          }
+        },
+        {
+          "name": "Delete Product (Admin)",
+          "request": {
+             "method": "DELETE",
+             "header": [{ "key": "Authorization", "value": "Bearer {{adminToken}}" }],
+             "url": { "raw": "{{baseUrl}}/admin/products/PRODUCT_ID", "host": ["{{baseUrl}}"], "path": ["admin", "products", "PRODUCT_ID"] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Products & Categories",
+      "item": [
+        {
+          "name": "Get All Products",
+          "request": {
+             "method": "GET",
+             "url": { "raw": "{{baseUrl}}/products", "host": ["{{baseUrl}}"], "path": ["products"] }
+          }
+        },
+        {
+          "name": "Create Product",
+          "request": {
+             "method": "POST",
+             "header": [{ "key": "Authorization", "value": "Bearer {{adminToken}}" }, { "key": "Content-Type", "value": "application/json" }],
+             "url": { "raw": "{{baseUrl}}/products", "host": ["{{baseUrl}}"], "path": ["products"] },
+             "body": { "mode": "raw", "raw": "{\n  \"name\": \"New Gadget\",\n  \"price\": 100\n}" }
+          }
+        },
+        {
+          "name": "Get Categories",
+          "request": {
+             "method": "GET",
+             "url": { "raw": "{{baseUrl}}/categories", "host": ["{{baseUrl}}"], "path": ["categories"] }
+          }
+        },
+        {
+          "name": "Create Category",
+          "request": {
+             "method": "POST",
+             "header": [{ "key": "Authorization", "value": "Bearer {{adminToken}}" }, { "key": "Content-Type", "value": "application/json" }],
+             "url": { "raw": "{{baseUrl}}/categories", "host": ["{{baseUrl}}"], "path": ["categories"] },
+             "body": { "mode": "raw", "raw": "{\n  \"name\": \"Smart Home\",\n  \"slug\": \"smart-home\"\n}" }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Articles & Videos",
+      "item": [
+        {
+          "name": "Get Articles",
+          "request": {
+             "method": "GET",
+             "url": { "raw": "{{baseUrl}}/articles", "host": ["{{baseUrl}}"], "path": ["articles"] }
+          }
+        },
+        {
+          "name": "Create Article",
+          "request": {
+             "method": "POST",
+             "header": [{ "key": "Authorization", "value": "Bearer {{adminToken}}" }, { "key": "Content-Type", "value": "application/json" }],
+             "url": { "raw": "{{baseUrl}}/articles", "host": ["{{baseUrl}}"], "path": ["articles"] },
+             "body": { "mode": "raw", "raw": "{\n  \"title\": \"New Article\",\n  \"content\": \"Great read...\"\n}" }
+          }
+        },
+        {
+          "name": "Get Videos",
+          "request": {
+             "method": "GET",
+             "url": { "raw": "{{baseUrl}}/videos", "host": ["{{baseUrl}}"], "path": ["videos"] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Orders & Cart",
+      "item": [
+        {
+          "name": "Get Cart",
+          "request": {
+             "method": "GET",
+             "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+             "url": { "raw": "{{baseUrl}}/carts", "host": ["{{baseUrl}}"], "path": ["carts"] }
+          }
+        },
+        {
+          "name": "Add to Cart",
+          "request": {
+             "method": "POST",
+             "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }, { "key": "Content-Type", "value": "application/json" }],
+             "url": { "raw": "{{baseUrl}}/carts", "host": ["{{baseUrl}}"], "path": ["carts"] },
+             "body": { "mode": "raw", "raw": "{\n  \"productId\": \"PRODUCT_ID\",\n  \"quantity\": 1\n}" }
+          }
+        },
+        {
+          "name": "Get Orders",
+          "request": {
+             "method": "GET",
+             "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+             "url": { "raw": "{{baseUrl}}/orders", "host": ["{{baseUrl}}"], "path": ["orders"] }
+          }
+        },
+        {
+           "name": "Create Order",
+           "request": {
+              "method": "POST",
+              "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }, { "key": "Content-Type", "value": "application/json" }],
+              "url": { "raw": "{{baseUrl}}/orders", "host": ["{{baseUrl}}"], "path": ["orders"] },
+              "body": { "mode": "raw", "raw": "{\n  \"totalAmount\": 1000,\n  \"address\": \"HCM\"\n}" }
+           }
+        }
+      ]
+    },
+    {
+      "name": "Social (Comments, Reviews)",
+      "item": [
+        {
+           "name": "Post Comment",
+           "request": {
+              "method": "POST",
+              "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }, { "key": "Content-Type", "value": "application/json" }],
+              "url": { "raw": "{{baseUrl}}/comments", "host": ["{{baseUrl}}"], "path": ["comments"] },
+              "body": { "mode": "raw", "raw": "{\n  \"articleId\": \"ARTICLE_ID\",\n  \"text\": \"Nice post!\"\n}" }
+           }
+        },
+        {
+           "name": "Post Review",
+           "request": {
+              "method": "POST",
+              "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }, { "key": "Content-Type", "value": "application/json" }],
+              "url": { "raw": "{{baseUrl}}/reviews", "host": ["{{baseUrl}}"], "path": ["reviews"] },
+              "body": { "mode": "raw", "raw": "{\n  \"productId\": \"PRODUCT_ID\",\n  \"rating\": 5,\n  \"comment\": \"Excellent product!\"\n}" }
+           }
+        }
+      ]
+    }
+  ]
+}

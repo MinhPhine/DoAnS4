@@ -1,0 +1,47 @@
+const express = require('express');
+const router = express.Router();
+const Category = require('../models/Category');
+const { auth, checkRole } = require('../middleware/auth');
+
+// Get all categories
+router.get('/', async (req, res) => {
+  try {
+    const categories = await Category.find();
+    res.json(categories);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// Create category (Admin only)
+router.post('/', auth, checkRole(['admin']), async (req, res) => {
+  try {
+    const newCategory = new Category(req.body);
+    const category = await newCategory.save();
+    res.status(201).json(category);
+  } catch (err) {
+    res.status(400).json({ error: err.message });
+  }
+});
+
+// Update category (Admin only)
+router.put('/:id', auth, checkRole(['admin']), async (req, res) => {
+  try {
+    const category = await Category.findByIdAndUpdate(req.params.id, req.body, { new: true });
+    res.json(category);
+  } catch (err) {
+    res.status(400).json({ error: err.message });
+  }
+});
+
+// Delete category (Admin only)
+router.delete('/:id', auth, checkRole(['admin']), async (req, res) => {
+  try {
+    await Category.findByIdAndDelete(req.params.id);
+    res.json({ message: 'Deleted successfully' });
+  } catch (err) {
+    res.status(400).json({ error: err.message });
+  }
+});
+
+module.exports = router;
