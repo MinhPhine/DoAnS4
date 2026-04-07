@@ -4,7 +4,7 @@ services:
     name: doan-api
     env: docker
     dockerContext: ./backend
-    dockerfilePath: Dockerfile
+    dockerfilePath: backend/Dockerfile # Path relative to repo root
     plan: free
     envVars:
       - key: NODE_ENV
@@ -21,7 +21,7 @@ services:
     name: doan-web
     env: docker
     dockerContext: ./frontend
-    dockerfilePath: Dockerfile
+    dockerfilePath: frontend/Dockerfile # Path relative to repo root
     plan: free
     envVars:
       - key: NEXT_PUBLIC_API_URL
