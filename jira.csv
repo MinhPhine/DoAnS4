@@ -1,0 +1,66 @@
+Issue ID,Summary,Issue Type,Description,Priority,Component,Epic Name,Parent ID
+1,Authentication & Security,Epic,Secure access for Users Creators and Admins,High,Backend;Frontend,Authentication & Security,
+2,Creator Studio Core,Epic,Writing editing and publishing system,High,Backend;Frontend,Creator Studio Core,
+3,Dashboard & User Settings,Epic,Personalized control panels for all roles,Medium,Frontend,Dashboard & User Settings,
+4,E-commerce Integration,Epic,Product listing cart and COD checkout,High,Backend;Frontend;Database,E-commerce Integration,
+5,Forum & Community,Epic,Real-time discussions and user interactions,Medium,Backend;Frontend;Database,Forum & Community,
+6,Policy & Legal Compliance,Epic,Terms Privacy and Warranty pages,Low,Frontend,Policy & Legal Compliance,
+7,Performance Framework,Epic,Server-side rendering caching and SEO,Medium,Backend;Frontend,Performance Framework,
+8,Admin Oversight,Epic,Tools for content moderation and user management,High,Backend;Frontend,Admin Oversight,
+9,Quality Assurance,Epic,Comprehensive testing across all modules,High,Testing,Quality Assurance,
+10,Production Release,Epic,Final deployment and CI/CD automation,High,Deploy,Production Release,
+11,Long-in & Registration with JWT,Story,Secure authentication flow implementation,High,Backend;Frontend,,1
+12,Password Reset via Email,Story,User recovery flow using SMTP/Mailtrap,Medium,Backend,,1
+13,Rich Text Editor for Creators,Story,Dynamic content creation tool,High,Frontend,,2
+14,Image Upload & Storage,Story,Cloudinary/S3 integration for media,Medium,Backend,,2
+15,Full-width Dashboard Layout,Story,Expand layout to 100% width,Medium,Frontend,,3
+16,Responsive Sidebar Navigation,Story,Mobile-friendly dashboard sidebar,High,Frontend,,3
+17,Product Detail Visualization,Story,High-fidelity product pages,Medium,Frontend,,4
+18,Shopping Cart Logic,Story,State management for cart items,High,Frontend,,4
+19,Comparison Tool Interface,Story,Side-by-side product specs table,Medium,Frontend,,4
+20,Forum Category Browsing,Story,Navigate through community sections,Low,Frontend,,5
+21,User Comment System,Story,Interactive comments on articles,Medium,Backend;Frontend,,5
+22,Terms of Service Bento Grid,Story,Modern layout for legal text,Low,Frontend,,6
+23,Warranty Policy 4-step Flow,Story,Visual warranty process,Low,Frontend,,6
+24,Privacy Policy Security Highlights,Story,Encryption and data protection cards,Low,Frontend,,6
+25,Header Active Link Highlight,Story,Dynamic active navigation state,Medium,Frontend,,7
+26,Profile Management UI,Story,User avatar and info updates,Medium,Frontend,,3
+27,Order History Tracking,Story,Purchase history list with status,High,Backend;Frontend,,4
+28,Sales Data Reporting,Story,Financial analytics for admins,High,Backend;Frontend,,8
+29,Search Engine Optimization (SEO),Story,Meta tags and semantic HTML,Medium,Frontend,,7
+30,Multi-environment Deployment,Story,Staging and Production pipelines,High,Deploy,,10
+31,Implement Login Form UI,Task,Create React components for login,High,Frontend,,11
+32,Setup Express JWT Middleware,Task,Secure API endpoints with token check,High,Backend,,11
+33,Create MongoDB User Schema,Task,Define data structure for account,High,Database,,11
+34,Add Form Validation,Task,Use Zod for input sanitization,Medium,Frontend,,11
+35,Design Dashboard Sidebar CSS,Task,Custom styles for uniform look,Medium,Frontend,,16
+36,Build Lịch sử mua hàng Card,Task,Component for individual orders,Medium,Frontend,,27
+37,Integrate Pill-shaped Action Buttons,Task,Pill-shaped detail/re-order buttons,Low,Frontend,,27
+38,Implement Trãi đều Layout Logic,Task,Tailwind classes for full-width,Medium,Frontend,,15
+39,Setup Lucide-React Icon Library,Task,Standardize icons across app,Low,Frontend,,
+40,Build Legal Sidebar Component,Task,Navigation for policy sections,Low,Frontend,,6
+41,Add CheckCircle to Policy Page,Task,Import missing icon from Lucide,High,Frontend,,6
+42,Connect Footer Links to policy routes,Task,Update Link hrefs in Footer.jsx,Medium,Frontend,,6
+43,Implement Redirect for /policy,Task,Fix 404 by redirecting to /terms,Medium,Frontend,,6
+44,Add usePathname to Header,Task,Dynamic active nav highlight,Medium,Frontend,,25
+45,Fix Italic titles in Policies,Task,Remove italic class from h1,Low,Frontend,,6
+46,Hide Header on Login Page,Task,Conditional rendering in ClientLayout,Medium,Frontend,,11
+47,Hide Footer on Register Page,Task,Conditional rendering in ClientLayout,Medium,Frontend,,11
+48,Setup GitHub Action for Staging,Task,Auto-deploy PRs to staging,High,Deploy,,30
+49,Create API for Product Search,Task,Endpoint for global search,Medium,Backend,,4
+50,Optimize Images for LCP,Task,Use next/image for performance,Medium,Frontend,,7
+51,Refactor Base Database Logic,Task,Generic find/update methods,High,Database,,
+52,Setup Sentry for Bug Tracking,Task,Real-time error monitoring,High,Testing,,9
+53,Implement Multi-role ACL,Task,Access control for Admin/User,High,Backend,,1
+54,Style Mobile Nav Menu,Task,Hamburger menu for smaller screens,High,Frontend,,
+55,Add Toast Notifications,Task,Feedback for user actions,Medium,Frontend,,
+56,Setup Production SSL Certificates,Task,HTTPS configuration for domain,High,Deploy,,10
+57,Build Comparison Logic API,Task,Fetch specs for multiple products,Medium,Backend,,19
+58,Create User Activity Log,Task,Track logins and page views,Low,Backend,,8
+59,Sanitize User Generated Content,Task,XSS protection for forum,High,Backend,,5
+60,Implement Infinite Scroll for Forum,Task,Performance update for threads,Medium,Frontend,,5
+61,CheckCircle is not defined in Privacy page,Bug,ReferenceError fix required,High,Frontend,,6
+62,Header active state stuck on Home page,Bug,Navigation logic fix required,High,Frontend,,25
+63,Titles are incorrectly italicized,Bug,Styling refinement required,Low,Frontend,,6
+64, /policy route leads to missing page,Bug,404 error fix required,Medium,Frontend,,6
+65,Header showing on focused auth pages,Bug,UX refinement required,Medium,Frontend,,11

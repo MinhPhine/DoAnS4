@@ -1,0 +1,71 @@
+@import "tailwindcss";
+
+:root {
+  --background: #F8F9FA;
+  --foreground: #1D1D1F;
+  --primary: #0060E4;
+  --primary-hover: #0056D2;
+  --secondary: #6B7280;
+  --card-bg: #FFFFFF;
+  --border-color: #E5E7EB;
+  --input-bg: #E9ECEF;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-primary: var(--primary);
+  --color-primary-hover: var(--primary-hover);
+  --color-secondary: var(--secondary);
+  --color-card: var(--card-bg);
+  --color-border-custom: var(--border-color);
+  --color-input-field: var(--input-bg);
+  
+  --font-sans: "Inter", system-ui, -apple-system, sans-serif;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+@layer components {
+  .container-custom {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+}
+
+@layer utilities {
+  .premium-shadow {
+    box-shadow: 0 20px 50px -12px rgba(0, 97, 255, 0.08);
+  }
+  
+  .hover-lift {
+    @apply transition-transform duration-300 hover:-translate-y-1 hover:shadow-lg;
+  }
+  
+  .glass-card {
+    @apply bg-white/80 backdrop-blur-md border border-white shadow-sm;
+  }
+  
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  
+  .animate-slow-fade {
+    animation: fadeIn 0.8s ease-out forwards;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+}
+
