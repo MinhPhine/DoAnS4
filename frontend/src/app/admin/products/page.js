@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import API_URL from "@/config/api";
 import { ShoppingBag, Search, Trash2, Star, Package } from "lucide-react";
 
 export default function AdminProductsPage() {
@@ -18,7 +19,7 @@ export default function AdminProductsPage() {
 
   async function fetchProducts() {
     try {
-      const res = await fetch("http://localhost:5000/api/admin/products", { headers: { "x-auth-token": token } });
+      const res = await fetch(`${API_URL}/admin/products`, { headers: { "x-auth-token": token } });
       if (res.ok) setProducts(await res.json());
     } catch (err) {
       console.error(err);
@@ -30,7 +31,7 @@ export default function AdminProductsPage() {
   async function handleDelete(id) {
     if (!confirm("Bạn có chắc muốn xóa sản phẩm này?")) return;
     try {
-      const res = await fetch(`http://localhost:5000/api/admin/products/${id}`, { method: "DELETE", headers });
+      const res = await fetch(`${API_URL}/admin/products/${id}`, { method: "DELETE", headers });
       if (res.ok) {
         setProducts(products.filter(p => p._id !== id));
       }
@@ -180,3 +181,4 @@ export default function AdminProductsPage() {
     </div>
   );
 }
+

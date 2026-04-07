@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useParams } from "next/navigation";
 import { useState, useEffect } from "react";
 import { ChevronRight, Eye, Clock, Tag, ArrowLeft, ThumbsUp, MessageSquare, Share2 } from "lucide-react";
+import API_URL from "@/config/api";
 
 export default function ArticleDetailPage() {
   const params = useParams();
@@ -14,7 +15,7 @@ export default function ArticleDetailPage() {
   useEffect(() => {
     async function fetchArticle() {
       try {
-        const res = await fetch(`http://localhost:5000/api/articles/${slug}`);
+        const res = await fetch(`${API_URL}/articles/${slug}`);
         if (res.ok) setArticle(await res.json());
       } catch (err) {
         console.error("Lỗi:", err);

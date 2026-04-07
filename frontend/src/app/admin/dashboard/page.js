@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useCallback } from "react";
+import API_URL from "@/config/api";
 import { useAuth } from "@/context/AuthContext";
 import {
   Users, ShoppingBag, FileText, ShoppingCart, ArrowUpRight, ArrowDownRight,
@@ -62,7 +63,7 @@ export default function AdminDashboard() {
     try {
       const endpoints = ['stats','users','orders','products','articles','comments','reviews','videos','system-logs'];
       const results = await Promise.all(
-        endpoints.map(e => fetch(`http://localhost:5000/api/admin/${e}`, { headers: H }).then(r => r.json()))
+        endpoints.map(e => fetch(`${API_URL}/admin/${e}`, { headers: H }).then(r => r.json()))
       );
       setStats(results[0]);
       setData({
@@ -84,7 +85,7 @@ export default function AdminDashboard() {
   // ---- Generic delete ----
   async function del(endpoint, id, key) {
     setBusyId(id);
-    await fetch(`http://localhost:5000/api/admin/${endpoint}/${id}`, { method: 'DELETE', headers: H });
+    await fetch(`${API_URL}/admin/${endpoint}/${id}`, { method: 'DELETE', headers: H });
     setData(prev => ({ ...prev, [key]: prev[key].filter(x => x._id !== id) }));
     setStats(prev => ({ ...prev, [`total${key.charAt(0).toUpperCase()+key.slice(1)}`]: (prev[`total${key.charAt(0).toUpperCase()+key.slice(1)}`]||1)-1 }));
     setBusyId(null);
@@ -93,7 +94,7 @@ export default function AdminDashboard() {
   // ---- Update order status ----
   async function updateOrder(id, status) {
     setBusyId(id);
-    const r = await fetch(`http://localhost:5000/api/admin/orders/${id}/status`, { method:'PUT', headers:H, body:JSON.stringify({status}) });
+    const r = await fetch(`${API_URL}/admin/orders/${id}/status`, { method:'PUT', headers:H, body:JSON.stringify({status}) });
     const updated = await r.json();
     setData(prev => ({ ...prev, orders: prev.orders.map(o => o._id===id ? {...o, status: updated.status} : o) }));
     setBusyId(null);
@@ -102,7 +103,7 @@ export default function AdminDashboard() {
   // ---- Update user role ----
   async function updateRole(id, role) {
     setBusyId(id);
-    await fetch(`http://localhost:5000/api/admin/users/${id}/role`, { method:'PUT', headers:H, body:JSON.stringify({role}) });
+    await fetch(`${API_URL}/admin/users/${id}/role`, { method:'PUT', headers:H, body:JSON.stringify({role}) });
     setData(prev => ({ ...prev, users: prev.users.map(u => u._id===id ? {...u, role} : u) }));
     setBusyId(null);
   }
@@ -110,7 +111,7 @@ export default function AdminDashboard() {
   // ---- Toggle article status ----
   async function toggleArticle(id, status) {
     setBusyId(id);
-    await fetch(`http://localhost:5000/api/admin/articles/${id}/status`, { method:'PUT', headers:H, body:JSON.stringify({status}) });
+    await fetch(`${API_URL}/admin/articles/${id}/status`, { method:'PUT', headers:H, body:JSON.stringify({status}) });
     setData(prev => ({ ...prev, articles: prev.articles.map(a => a._id===id ? {...a, status} : a) }));
     setBusyId(null);
   }
@@ -620,3 +621,4 @@ export default function AdminDashboard() {
     </div>
   );
 }
+

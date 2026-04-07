@@ -1,4 +1,5 @@
 "use client";
+import API_URL from "@/config/api";
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
@@ -31,7 +32,7 @@ export default function NewArticlePage() {
       .replace(/(^-|-$)/g, "");
 
     try {
-      const res = await fetch("http://localhost:5000/api/articles", {
+      const res = await fetch(`${API_URL}/articles`, {
         method: "POST",
         headers: { "Content-Type": "application/json", "x-auth-token": token },
         body: JSON.stringify({
@@ -152,3 +153,4 @@ export default function NewArticlePage() {
     </div>
   );
 }
+

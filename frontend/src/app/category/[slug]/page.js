@@ -4,6 +4,9 @@ import Link from "next/link";
 import { Search, SlidersHorizontal, ArrowRight, ShoppingCart, Star, Eye } from "lucide-react";
 import { useState, useEffect } from "react";
 import { useParams } from "next/navigation";
+import API_URL from "@/config/api";
+
+const BASE_URL = API_URL.replace('/api', '');
 
 const CATEGORY_INFO = {
   mobile: {
@@ -80,7 +83,7 @@ export default function CategoryPage() {
   useEffect(() => {
     async function fetchProducts() {
       try {
-        const res = await fetch(`http://localhost:5000/api/products?category=${slug}`);
+        const res = await fetch(`${API_URL}/products?category=${slug}`);
         if (res.ok) {
           const data = await res.json();
           setProducts(data);
@@ -216,7 +219,7 @@ export default function CategoryPage() {
                     <div className="w-full h-full flex items-center justify-center">
                       {product.images && product.images[0] ? (
                         <img 
-                          src={product.images[0].startsWith('http') ? product.images[0] : `http://localhost:5000${product.images[0]}`}
+                          src={product.images[0].startsWith('http') ? product.images[0] : `${BASE_URL}${product.images[0]}`}
                           alt={product.name}
                           className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                         />

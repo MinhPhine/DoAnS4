@@ -2,6 +2,7 @@
 
 import { createContext, useContext, useState, useEffect, useCallback } from "react";
 import { useAuth } from "./AuthContext";
+import API_URL from "@/config/api";
 
 const CartContext = createContext();
 
@@ -17,7 +18,7 @@ export function CartProvider({ children }) {
     if (!token) return;
     setLoading(true);
     try {
-      const res = await fetch("http://localhost:5000/api/carts", {
+      const res = await fetch(`${API_URL}/carts`, {
         headers: { "x-auth-token": token }
       });
       if (res.ok) {
@@ -43,7 +44,7 @@ export function CartProvider({ children }) {
   async function syncCart(newItems) {
     if (!token) return;
     try {
-      await fetch("http://localhost:5000/api/carts", {
+      await fetch(`${API_URL}/carts`, {
         method: "POST",
         headers: { "x-auth-token": token, "Content-Type": "application/json" },
         body: JSON.stringify({ items: newItems.map(item => ({ product: item.product._id || item.product, qty: item.qty })) })

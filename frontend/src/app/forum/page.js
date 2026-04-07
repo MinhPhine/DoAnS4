@@ -1,4 +1,5 @@
 "use client";
+import API_URL from "@/config/api";
 
 import Link from "next/link";
 import { useState, useEffect } from "react";
@@ -13,7 +14,7 @@ export default function ForumPage() {
   useEffect(() => {
     async function fetchArticles() {
       try {
-        const res = await fetch("http://localhost:5000/api/articles");
+        const res = await fetch(`${API_URL}/articles`);
         if (res.ok) setArticles(await res.json());
       } catch (err) {
         console.error("Lỗi fetch articles:", err);
@@ -239,3 +240,4 @@ export default function ForumPage() {
     </div>
   );
 }
+

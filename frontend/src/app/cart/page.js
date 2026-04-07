@@ -3,6 +3,9 @@
 import { Trash2, ShoppingBag, ShieldCheck, Lock, ArrowRight, Minus, Plus, ChevronLeft, Package } from 'lucide-react';
 import Link from 'next/link';
 import { useCart } from '@/context/CartContext';
+import API_URL from "@/config/api";
+
+const BASE_URL = API_URL.replace('/api', '');
 
 export default function CartPage() {
   const { cart, loading, removeFromCart, updateQuantity, getCartTotal, getCartCount } = useCart();
@@ -49,7 +52,7 @@ export default function CartPage() {
                 if (!product || typeof product === 'string') return null;
 
                 const imgSrc = product.images && product.images[0]
-                  ? (product.images[0].startsWith('http') ? product.images[0] : `http://localhost:5000${product.images[0]}`)
+                  ? (product.images[0].startsWith('http') ? product.images[0] : `${BASE_URL}${product.images[0]}`)
                   : 'https://via.placeholder.com/200?text=No+Image';
                 const itemPrice = product.discountPrice || product.price;
                 const productId = product._id;

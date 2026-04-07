@@ -6,6 +6,9 @@ import { useState, useEffect } from "react";
 import { ChevronRight, ShoppingBag, CheckCircle2, XCircle, ThumbsUp, MessageSquare, Star, Check } from "lucide-react";
 import { useCart } from "@/context/CartContext";
 import { useToast } from "@/context/ToastContext";
+import API_URL from "@/config/api";
+
+const BASE_URL = API_URL.replace('/api', '');
 
 export default function ProductDetailPage() {
   const params = useParams();
@@ -21,7 +24,7 @@ export default function ProductDetailPage() {
     async function fetchProduct() {
       try {
         // Tìm sản phẩm theo slug
-        const res = await fetch(`http://localhost:5000/api/products`);
+        const res = await fetch(`${API_URL}/products`);
         if (res.ok) {
           const products = await res.json();
           const found = products.find(p => p.slug === slug);
@@ -75,7 +78,7 @@ export default function ProductDetailPage() {
   }
 
   const mainImage = product.images && product.images[selectedImg]
-    ? (product.images[selectedImg].startsWith('http') ? product.images[selectedImg] : `http://localhost:5000${product.images[selectedImg]}`)
+    ? (product.images[selectedImg].startsWith('http') ? product.images[selectedImg] : `${BASE_URL}${product.images[selectedImg]}`)
     : "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&q=80&w=800";
 
   const categoryMap = { mobile: "Điện thoại", laptop: "Laptop", accessory: "Phụ kiện", ai: "AI & Robot", gaming: "Gaming" };
@@ -112,7 +115,7 @@ export default function ProductDetailPage() {
           {product.images && product.images.length > 0 && (
             <div className="grid grid-cols-4 gap-4">
               {product.images.map((img, i) => {
-                const imgUrl = img.startsWith('http') ? img : `http://localhost:5000${img}`;
+                const imgUrl = img.startsWith('http') ? img : `${BASE_URL}${img}`;
                 return (
                   <button
                     key={i}

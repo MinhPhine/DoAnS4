@@ -3,6 +3,7 @@
 import { ShoppingBag, Package, Truck, Clock, CheckCircle2, ChevronDown, Loader2, XCircle } from 'lucide-react';
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
+import API_URL from "@/config/api";
 
 const STATUS_CONFIG = {
   pending:    { label: 'CHỜ XÁC NHẬN', badgeClass: 'bg-[#FFF3E0] text-[#EA580C]', dot: 'bg-[#EA580C]', filter: 'processing' },
@@ -29,7 +30,7 @@ export default function PurchaseHistoryPage() {
 
   useEffect(() => {
     if (!token) { setLoading(false); return; }
-    fetch('http://localhost:5000/api/orders', {
+    fetch(`${API_URL}/orders`, {
       headers: { 'x-auth-token': token }
     })
       .then(r => r.json())

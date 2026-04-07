@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import API_URL from "@/config/api";
 import { Users, Search, Trash2, Shield, ChevronDown } from "lucide-react";
 
 export default function AdminUsersPage() {
@@ -17,7 +18,7 @@ export default function AdminUsersPage() {
 
   async function fetchUsers() {
     try {
-      const res = await fetch("http://localhost:5000/api/admin/users", { headers: { "x-auth-token": token } });
+      const res = await fetch(`${API_URL}/admin/users`, { headers: { "x-auth-token": token } });
       if (res.ok) setUsers(await res.json());
     } catch (err) {
       console.error(err);
@@ -29,7 +30,7 @@ export default function AdminUsersPage() {
   async function handleDeleteUser(id) {
     if (!confirm("Bạn có chắc muốn xóa người dùng này?")) return;
     try {
-      const res = await fetch(`http://localhost:5000/api/admin/users/${id}`, { method: "DELETE", headers });
+      const res = await fetch(`${API_URL}/admin/users/${id}`, { method: "DELETE", headers });
       if (res.ok) {
         setUsers(users.filter(u => u._id !== id));
       }
@@ -40,7 +41,7 @@ export default function AdminUsersPage() {
 
   async function handleRoleChange(id, newRole) {
     try {
-      const res = await fetch(`http://localhost:5000/api/admin/users/${id}/role`, {
+      const res = await fetch(`${API_URL}/admin/users/${id}/role`, {
         method: "PUT",
         headers,
         body: JSON.stringify({ role: newRole })
@@ -163,3 +164,4 @@ export default function AdminUsersPage() {
     </div>
   );
 }
+

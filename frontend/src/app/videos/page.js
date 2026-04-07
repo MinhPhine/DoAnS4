@@ -1,4 +1,5 @@
 "use client";
+import API_URL from "@/config/api";
 
 import Link from "next/link";
 import { useState, useEffect } from "react";
@@ -13,7 +14,7 @@ export default function VideosPage() {
   useEffect(() => {
     async function fetchVideos() {
       try {
-        const res = await fetch("http://localhost:5000/api/videos");
+        const res = await fetch(`${API_URL}/videos`);
         if (res.ok) {
           const data = await res.json();
           setVideos(data.filter(v => v.category !== "shorts"));
@@ -303,3 +304,4 @@ export default function VideosPage() {
     </div>
   );
 }
+

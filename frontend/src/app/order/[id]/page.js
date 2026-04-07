@@ -4,6 +4,9 @@ import { MapPin, CreditCard, ChevronRight, FileText, CheckCircle2, Truck, Loader
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
 import { useParams } from 'next/navigation';
+import API_URL from "@/config/api";
+
+const BASE_URL = API_URL.replace('/api', '');
 
 const STATUS_MAP = {
   pending:    { label: 'Chờ xác nhận', color: '#EA580C' },
@@ -28,7 +31,7 @@ export default function OrderDetailPage() {
     async function loadOrder() {
       try {
         // 1. Lấy thông tin đơn hàng
-        const orderRes = await fetch(`http://localhost:5000/api/orders`, {
+        const orderRes = await fetch(`${API_URL}/orders`, {
           headers: { 'x-auth-token': token }
         });
         const orders = await orderRes.json();
@@ -36,7 +39,7 @@ export default function OrderDetailPage() {
         setOrder(found || null);
 
         // 2. Lấy chi tiết sản phẩm trong đơn
-        const itemsRes = await fetch(`http://localhost:5000/api/order-items/${id}`, {
+        const itemsRes = await fetch(`${API_URL}/order-items/${id}`, {
           headers: { 'x-auth-token': token }
         });
         const itemsData = await itemsRes.json();
@@ -44,7 +47,7 @@ export default function OrderDetailPage() {
 
         // 3. Lấy địa chỉ giao hàng
         if (found?.shippingAddress) {
-          const addrRes = await fetch(`http://localhost:5000/api/addresses`, {
+          const addrRes = await fetch(`${API_URL}/addresses`, {
             headers: { 'x-auth-token': token }
           });
           const addrList = await addrRes.json();
@@ -163,7 +166,7 @@ export default function OrderDetailPage() {
               ) : (
                 <div className="divide-y divide-[#F1F3F4]">
                   {items.map((item) => {
-                    const imgSrc = item.image?.startsWith('http') ? item.image : `http://localhost:5000${item.image}`;
+                    const imgSrc = item.image?.startsWith('http') ? item.image : `${BASE_URL}${item.image}`;
                     return (
                       <div key={item._id} className="p-10 flex flex-col md:flex-row items-center gap-8">
                         <div className="w-24 h-24 bg-[#F8F9FA] rounded-[20px] border border-[#E8EAED] p-4 shrink-0 overflow-hidden">
