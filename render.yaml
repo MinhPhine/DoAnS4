@@ -14,7 +14,7 @@ services:
       - key: JWT_SECRET
         generateValue: true
       - key: PORT
-        value: 10000 # Ép dùng cổng 10000 cho Render Free
+        value: 10000
 
   # Frontend Web
   - type: web
@@ -25,11 +25,8 @@ services:
     plan: free
     envVars:
       - key: NEXT_PUBLIC_API_URL
-        fromService:
-          type: web
-          name: doan-api
-          property: host
+        value: https://doan-api-v9z2.onrender.com/api # Full URL with /api suffix
       - key: NODE_ENV
         value: production
       - key: PORT
-        value: 10000 # Ép dùng cổng 10000 cho Render Free
+        value: 10000
