@@ -10,7 +10,7 @@ services:
       - key: NODE_ENV
         value: production
       - key: MONGODB_URI
-        sync: false # This will let you enter the value manually in the Render dashboard
+        value: mongodb+srv://Dung:01667499214@cluster0.romcgub.mongodb.net/?appName=Cluster0
       - key: JWT_SECRET
         generateValue: true
       - key: PORT
