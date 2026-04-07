@@ -10,9 +10,9 @@ services:
       - key: NODE_ENV
         value: production
       - key: MONGODB_URI
-        fromEnvVar: MONGODB_URI # We will set this in the Render Dashboard for security
+        sync: false # This will let you enter the value manually in the Render dashboard
       - key: JWT_SECRET
-        generateValue: true # Generate a random secret if not provided
+        generateValue: true
       - key: PORT
         value: 5000
 
@@ -25,9 +25,9 @@ services:
     plan: free
     envVars:
       - key: NEXT_PUBLIC_API_URL
-        fromContext:
-          service: doan-api
+        fromService:
+          type: web
+          name: doan-api
           property: host
-        # This will automatically point to your backend service URL
       - key: NODE_ENV
         value: production
